@@ -28,6 +28,16 @@ class TrRun(tornado.web.RequestHandler):
     使用 tr 的 run 方法
     '''
 
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "Content-Type")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+
+    def options(self):
+        # no body
+        self.set_status(204)
+        self.finish()
+
     def get(self):
         self.set_status(404)
         self.write("404 : Please use POST")
